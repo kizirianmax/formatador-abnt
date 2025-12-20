@@ -5,7 +5,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FileText, Download, BookOpen } from "lucide-react";
+import { FileText, Download, BookOpen, Calendar, Search } from "lucide-react";
+import { Link } from "wouter";
+import { Badge } from "@/components/ui/badge";
 
 export default function Home() {
   const [workData, setWorkData] = useState({
@@ -267,6 +269,46 @@ export default function Home() {
                 <div className="flex items-start gap-2">
                   <div className="w-1.5 h-1.5 rounded-full bg-indigo-600 mt-1.5" />
                   <p>Numeração: a partir da introdução</p>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Outras Ferramentas */}
+            <Card className="bg-gradient-to-br from-indigo-50 to-purple-50 border-indigo-200">
+              <CardHeader>
+                <CardTitle className="text-lg">Outras Ferramentas</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <Link href="/cronograma">
+                  <div className="p-3 bg-white rounded-lg border hover:border-indigo-300 hover:shadow-md transition-all cursor-pointer">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-indigo-100 rounded-lg">
+                        <Calendar className="h-5 w-5 text-indigo-600" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2">
+                          <span className="font-medium">Gerador de Cronogramas</span>
+                          <Badge className="bg-green-500 text-xs">Novo</Badge>
+                        </div>
+                        <p className="text-xs text-gray-500">Crie planos de estudo personalizados</p>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+                
+                <div className="p-3 bg-white/50 rounded-lg border border-dashed opacity-60">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-gray-100 rounded-lg">
+                      <Search className="h-5 w-5 text-gray-400" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2">
+                        <span className="font-medium text-gray-500">Source-Proof</span>
+                        <Badge variant="outline" className="text-xs">Em breve</Badge>
+                      </div>
+                      <p className="text-xs text-gray-400">Valide fontes acadêmicas</p>
+                    </div>
+                  </div>
                 </div>
               </CardContent>
             </Card>
