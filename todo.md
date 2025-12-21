@@ -9,3 +9,4 @@
 - [x] Source-Proof - página completa de validação de fontes
 - [x] Atualizar links e status dos cards na página inicial
 - [x] Importar de URL - extrair metadados e gerar referência ABNT automaticamente
+- [x] Biblioteca de Referências - salvar e organizar referências no localStorage

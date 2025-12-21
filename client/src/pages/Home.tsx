@@ -5,12 +5,16 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FileText, Download, BookOpen, Calendar, Search } from "lucide-react";
+import { FileText, Download, BookOpen, Calendar, Search, Library as LibraryIcon, Save } from "lucide-react";
 import { Link } from "wouter";
 import { Badge } from "@/components/ui/badge";
 import URLImporter from "@/components/URLImporter";
+import ReferenceLibrary from "@/components/ReferenceLibrary";
+import { useReferenceLibrary } from "@/hooks/useReferenceLibrary";
+
 
 export default function Home() {
+  const { addReference } = useReferenceLibrary();
   const [workData, setWorkData] = useState({
     title: "",
     author: "",
@@ -40,6 +44,14 @@ export default function Home() {
       ...prev,
       references: prev.references ? prev.references + "\n\n" + reference : reference
     }));
+  };
+
+  const handleSaveToLibrary = (reference: string, type: "site" | "livro" | "artigo" | "tese" | "outro" = "outro") => {
+    addReference(reference, type);
+  };
+
+  const handleSelectFromLibrary = (reference: string) => {
+    handleAddReference(reference);
   };
 
   return (
@@ -215,7 +227,16 @@ export default function Home() {
                   {/* Aba Referências */}
                   <TabsContent value="referencias" className="space-y-4">
                     {/* Importar de URL */}
-                    <URLImporter onReferenceGenerated={handleAddReference} />
+                    <URLImporter 
+                      onReferenceGenerated={(ref) => {
+                        handleAddReference(ref);
+                        // Salvar automaticamente na biblioteca como site
+                        handleSaveToLibrary(ref, "site");
+                      }} 
+                    />
+
+                    {/* Biblioteca de Referências */}
+                    <ReferenceLibrary onSelectReference={handleSelectFromLibrary} />
 
                     <div className="space-y-2">
                       <Label htmlFor="references">Referências Bibliográficas</Label>
