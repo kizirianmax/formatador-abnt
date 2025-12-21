@@ -2,6 +2,7 @@ import express from "express";
 import { createServer } from "http";
 import path from "path";
 import { fileURLToPath } from "url";
+import extractUrlRouter from "./routes/extract-url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -9,6 +10,12 @@ const __dirname = path.dirname(__filename);
 async function startServer() {
   const app = express();
   const server = createServer(app);
+
+  // Middleware para JSON
+  app.use(express.json());
+
+  // API Routes
+  app.use("/api/extract-url", extractUrlRouter);
 
   // Serve static files from dist/public in production
   const staticPath =

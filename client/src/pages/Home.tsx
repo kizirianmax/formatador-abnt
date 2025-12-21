@@ -8,6 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { FileText, Download, BookOpen, Calendar, Search } from "lucide-react";
 import { Link } from "wouter";
 import { Badge } from "@/components/ui/badge";
+import URLImporter from "@/components/URLImporter";
 
 export default function Home() {
   const [workData, setWorkData] = useState({
@@ -32,6 +33,13 @@ export default function Home() {
   const generatePDF = () => {
     // Aqui será implementada a geração do PDF
     alert("Gerando PDF com formatação ABNT...");
+  };
+
+  const handleAddReference = (reference: string) => {
+    setWorkData(prev => ({
+      ...prev,
+      references: prev.references ? prev.references + "\n\n" + reference : reference
+    }));
   };
 
   return (
@@ -206,6 +214,9 @@ export default function Home() {
 
                   {/* Aba Referências */}
                   <TabsContent value="referencias" className="space-y-4">
+                    {/* Importar de URL */}
+                    <URLImporter onReferenceGenerated={handleAddReference} />
+
                     <div className="space-y-2">
                       <Label htmlFor="references">Referências Bibliográficas</Label>
                       <Textarea

@@ -11,7 +11,7 @@ function Router() {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
-      <Route path={"/cronograma"} component={Cronograma} />
+      <Route path="/cronograma" component={Cronograma} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
