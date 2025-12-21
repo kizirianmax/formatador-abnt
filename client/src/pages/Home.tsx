@@ -10,6 +10,9 @@ import { Link } from "wouter";
 import { Badge } from "@/components/ui/badge";
 import URLImporter from "@/components/URLImporter";
 import ReferenceLibrary from "@/components/ReferenceLibrary";
+import CitationGenerator from "@/components/CitationGenerator";
+import DocumentExporter from "@/components/DocumentExporter";
+import CloudSync from "@/components/CloudSync";
 import { useReferenceLibrary } from "@/hooks/useReferenceLibrary";
 
 
@@ -190,6 +193,17 @@ export default function Home() {
 
                   {/* Aba Conteúdo */}
                   <TabsContent value="conteudo" className="space-y-4">
+                    {/* Gerador de Citações */}
+                    <CitationGenerator 
+                      onInsertCitation={(citation) => {
+                        // Inserir citação no campo de desenvolvimento
+                        setWorkData(prev => ({
+                          ...prev,
+                          development: prev.development ? prev.development + " " + citation : citation
+                        }));
+                      }}
+                    />
+
                     <div className="space-y-2">
                       <Label htmlFor="introduction">1. Introdução</Label>
                       <Textarea
@@ -259,26 +273,11 @@ export default function Home() {
 
           {/* Sidebar */}
           <div className="space-y-6">
-            {/* Ações */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Ações</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <Button 
-                  className="w-full" 
-                  size="lg"
-                  onClick={generatePDF}
-                  disabled={!workData.title || !workData.author}
-                >
-                  <Download className="mr-2 h-4 w-4" />
-                  Gerar PDF
-                </Button>
-                <p className="text-xs text-gray-500 text-center">
-                  Preencha pelo menos título e autor
-                </p>
-              </CardContent>
-            </Card>
+            {/* Exportar Documento */}
+            <DocumentExporter workData={workData} />
+
+            {/* Sincronização na Nuvem */}
+            <CloudSync />
 
             {/* Normas ABNT */}
             <Card>

@@ -156,6 +156,15 @@ export function useReferenceLibrary() {
     return toExport.map(ref => ref.text).join("\n\n");
   }, [references]);
 
+  // Importar referências (para backup/sync)
+  const importReferences = useCallback((newRefs: Reference[]) => {
+    const existingIds = new Set(references.map(r => r.id));
+    const uniqueNewRefs = newRefs.filter(r => !existingIds.has(r.id));
+    const updated = [...uniqueNewRefs, ...references];
+    saveReferences(updated);
+    return uniqueNewRefs.length;
+  }, [references, saveReferences]);
+
   // Limpar tudo
   const clearAll = useCallback(() => {
     localStorage.removeItem(LIBRARY_KEY);
@@ -176,6 +185,7 @@ export function useReferenceLibrary() {
     addProject,
     removeProject,
     exportAsText,
+    importReferences,
     clearAll,
     totalCount: references.length
   };

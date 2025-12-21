@@ -3,6 +3,7 @@ import { createServer } from "http";
 import path from "path";
 import { fileURLToPath } from "url";
 import extractUrlRouter from "./routes/extract-url";
+import referencesRouter from "./routes/references";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -16,6 +17,7 @@ async function startServer() {
 
   // API Routes
   app.use("/api/extract-url", extractUrlRouter);
+  app.use("/api/references", referencesRouter);
 
   // Serve static files from dist/public in production
   const staticPath =

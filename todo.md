@@ -10,3 +10,6 @@
 - [x] Atualizar links e status dos cards na página inicial
 - [x] Importar de URL - extrair metadados e gerar referência ABNT automaticamente
 - [x] Biblioteca de Referências - salvar e organizar referências no localStorage
+- [x] Gerador de Citações ABNT - citações diretas e indiretas formatadas
+- [x] Exportação Word/PDF - gerar documento completo formatado
+- [x] Sincronização na nuvem - salvar referências no banco para usuários logados
